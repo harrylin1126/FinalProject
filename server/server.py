@@ -178,8 +178,10 @@ class WebSocket:
             context = items['filebuffer']
             await self.VideoHandler(video_name[0],video_name[1], chunk_index, total_chunks, context,socket)
         elif items['flag']=='Type':
+            
             await self.SendStatus(socket,json.dumps({"status":True,"detail":"球種判斷成功"}))
         elif items['flag']=='Post':
+
             await self.SendStatus(socket,json.dumps({"status":True,"detail":"姿勢判斷成功"}))
     
     async def AcceptConnection(self,socket):
