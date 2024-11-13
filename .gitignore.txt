@@ -1,4 +1,4 @@
 [Rr]esource/
-
+baseball/node_modules/.cache/
 *.MP4
 *.mp4
