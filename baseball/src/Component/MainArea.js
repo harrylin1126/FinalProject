@@ -3,13 +3,14 @@ import UploadButton from "./SelectField";
 import NavBar from "./DivBar";
 import Button from "./Button";
 import ResultArea from "./ResultArea";
+import { ws } from './WebServer'
 
 
 export default class MainArea extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isUpload:false,
+            isUpload:true,
             videoPath:undefined
         }
     }
@@ -20,6 +21,29 @@ export default class MainArea extends React.Component {
             isUpload:true,
             videoPath:path
         })
+    }
+
+    BallTypeHandler()
+    {
+        ws.send(JSON.stringify({
+            flag: "Type",
+        }));
+        ws.onmessage = (result) => {
+            let msg = JSON.parse(result.data)
+            alert(msg['detail'])
+        }
+    }
+
+    PostHandler()
+    {
+        ws.send(JSON.stringify({
+            flag: "Post",
+        }));
+        ws.onmessage = (result) => {
+            let msg = JSON.parse(result.data)
+            alert(msg['detail'])
+        }
+        
     }
 
     render() {
@@ -33,8 +57,8 @@ export default class MainArea extends React.Component {
                     justifyContent:'space-between',
                     alignContent:'center'
                 }}>
-                <Button description="球種"></Button>
-                <Button description="姿勢"></Button>
+                <Button description="球種" action={()=>this.BallTypeHandler()}></Button>
+                <Button description="姿勢" action={()=>this.PostHandler()}></Button>
                 </div>
             </div>
         )

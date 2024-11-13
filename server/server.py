@@ -21,8 +21,8 @@ VIDEO_PATH=r"../baseball/src/Component/video/video.mp4"
 TEXT_PATH = r"./yololabel.txt"
 LastFrame_Path = r"./last_frame.jpg"
 OutPut_Path = r"./output.jpg"
-UnPredicted_Path = r"C:\FinalProject\server\balltype.csv"
-DataSet_Path = r"C:\FinalProject\server\svmFull.csv"
+UnPredicted_Path = r"C:/FinalProject/server/balltype.csv"
+DataSet_Path = r"C:/FinalProject/server/svmFull.csv"
 class Model:
     
     def __init__(self, image_width=1920, image_height=1080, num_points=10):
@@ -178,7 +178,9 @@ class WebSocket:
             context = items['filebuffer']
             await self.VideoHandler(video_name[0],video_name[1], chunk_index, total_chunks, context,socket)
         elif items['flag']=='Type':
-            pass
+            await self.SendStatus(socket,json.dumps({"status":True,"detail":"球種判斷成功"}))
+        elif items['flag']=='Post':
+            await self.SendStatus(socket,json.dumps({"status":True,"detail":"姿勢判斷成功"}))
     
     async def AcceptConnection(self,socket):
         async for message in socket:

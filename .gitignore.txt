@@ -1,0 +1,4 @@
+[Rr]esource/
+
+*.MP4
+*.mp4
